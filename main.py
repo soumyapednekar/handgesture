@@ -5,7 +5,7 @@ from werkzeug.utils import secure_filename
 from gesture_recognizer import recognize_gestures_and_display
 
 app = Flask(__name__)
-app.secret_key = "supersecretkey"  ]
+app.secret_key = "supersecretkey"  
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg'}
 
