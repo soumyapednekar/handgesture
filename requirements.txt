@@ -4,4 +4,3 @@ Werkzeug
 mediapipe
 matplotlib
 opencv-python-headless
-recognize_gestures_and_display
