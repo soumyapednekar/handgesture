@@ -5,7 +5,7 @@ from werkzeug.utils import secure_filename
 from gesture_recognizer import recognize_gestures_and_display
 
 app = Flask(__name__)
-app.secret_key = "supersecretkey"  # Add a secret key for flash messages
+app.secret_key = "supersecretkey"  ]
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg'}
 
@@ -20,7 +20,7 @@ def index():
 def visualize():
     IMAGE_FILENAMES = ['thumbs_down.jpg', 'victory.jpg', 'thumbs_up.jpg', 'pointing_up.jpg']
 
-    # Download images if they do not exist
+    #download images if they do not exist
     image_paths = []
     for name in IMAGE_FILENAMES:
         image_path = os.path.join('static', 'images', name)
@@ -29,7 +29,7 @@ def visualize():
             url = f'https://storage.googleapis.com/mediapipe-tasks/gesture_recognizer/{name}'
             urllib.request.urlretrieve(url, image_path)
 
-    # Call the gesture recognition function and save the output to a file
+    # call the gesture recognition function and save the output to a file
     output_path = os.path.join('static', 'images', 'gesture_visualization.png')
     recognize_gestures_and_display(image_paths, output_path)
 
