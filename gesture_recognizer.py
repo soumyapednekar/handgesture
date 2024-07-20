@@ -30,7 +30,6 @@ def resize_and_show(image):
         print("Image not loaded correctly.")
 
 def display_one_image(image, title, subplot, titlesize=16):
-    """Displays one image along with the predicted category name and score."""
     plt.subplot(*subplot)
     plt.imshow(image)
     if len(title) > 0:
@@ -38,7 +37,7 @@ def display_one_image(image, title, subplot, titlesize=16):
     return (subplot[0], subplot[1], subplot[2]+1)
 
 def display_batch_of_images_with_gestures_and_hand_landmarks(images, results):
-    # images and labels.
+    # images and Labels
     images = [image.numpy_view() for image in images]
     gestures = [top_gesture for (top_gesture, _) in results]
     multi_hand_landmarks_list = [multi_hand_landmarks for (_, multi_hand_landmarks) in results]
@@ -47,7 +46,7 @@ def display_batch_of_images_with_gestures_and_hand_landmarks(images, results):
     rows = int(math.sqrt(len(images)))
     cols = len(images) // rows
 
-    # Size and spacing.
+ # Size & spacing
     FIGSIZE = 13.0
     SPACING = 0.1
     subplot=(rows,cols, 1)
