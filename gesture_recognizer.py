@@ -6,7 +6,6 @@ from mediapipe.framework.formats import landmark_pb2
 import cv2
 import math
 
-# Set the backend before importing pyplot
 import matplotlib
 matplotlib.use('Agg')
 
@@ -14,11 +13,11 @@ mp_hands = mp.solutions.hands
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 
-DESIRED_HEIGHT = 300
-DESIRED_WIDTH = 300
+DESIRED_HEIGHT = 500
+DESIRED_WIDTH = 500
 
 def resize_and_show(image):
-    if image is not None:  # Check if image loaded successfully
+    if image is not None:  
         h, w = image.shape[:2]
         if h < w:
             img = cv2.resize(image, (DESIRED_WIDTH, math.floor(h/(w/DESIRED_WIDTH))))
@@ -39,13 +38,12 @@ def display_one_image(image, title, subplot, titlesize=16):
     return (subplot[0], subplot[1], subplot[2]+1)
 
 def display_batch_of_images_with_gestures_and_hand_landmarks(images, results):
-    """Displays a batch of images with the gesture category and its score along with the hand landmarks."""
     # Images and labels.
     images = [image.numpy_view() for image in images]
     gestures = [top_gesture for (top_gesture, _) in results]
     multi_hand_landmarks_list = [multi_hand_landmarks for (_, multi_hand_landmarks) in results]
 
-    # Auto-squaring: this will drop data that does not fit into square or square-ish rectangle.
+    #this will drop data that does not fit into square or square-ish rectangle.
     rows = int(math.sqrt(len(images)))
     cols = len(images) // rows
 
@@ -58,7 +56,6 @@ def display_batch_of_images_with_gestures_and_hand_landmarks(images, results):
     else:
         plt.figure(figsize=(FIGSIZE/rows*cols,FIGSIZE))
 
-    # Display gestures and hand landmarks.
     for i, (image, top_gesture) in enumerate(zip(images[:rows*cols], gestures[:rows*cols])):
         if top_gesture is not None:
             title = f"{top_gesture.category_name} ({top_gesture.score:.2f})"
