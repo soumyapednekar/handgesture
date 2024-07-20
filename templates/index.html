@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hand Gesture Classifier</title>
+    <style>
+        .uploaded-image {
+            width: 300px;
+            height: 300px;
+            object-fit: cover; /* This ensures the image covers the 300x300 area without distortion */
+        }
+        .instructions {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+        .messages {
+            color: red;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Instructions for Image Upload</h2>
+    <p class="instructions">
+        To use the Hand Gesture Classifier, please upload images of the following hand gestures:
+        <ol>
+            <li><b>Pointing Up</b>: Take a clear photo of a hand making the "pointing up" gesture.</li>
+            <li><b>Thumbs Down</b>: Take a clear photo of a hand making the "thumbs down" gesture.</li>
+            <li><b>Thumbs Up</b>: Take a clear photo of a hand making the "thumbs up" gesture.</li>
+            <li><b>Victory Sign</b>: Take a clear photo of a hand making the "victory" or "peace" sign gesture.</li>
+        </ol>
+        Ensure that:
+        <ul>
+            <li>The hand is clearly visible in the image.</li>
+            <li>The gesture is clearly recognizable.</li>
+            <li>The background is plain or does not interfere with the gesture visibility.</li>
+            <li>The images are in PNG, JPG, or JPEG format.</li>
+        </ul>
+        After taking the photos, visit the upload page to upload your images and see the gesture recognition results!
+    </p>
+
+    <h1>Upload Images for Gesture Prediction</h1>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" multiple>
+        <input type="submit" value="Upload">
+    </form>
+    {% if image_url %}
+        <h2>Predicted Gestures</h2>
+        <img src="{{ image_url }}" alt="Gesture Visualization" class="uploaded-image">
+    {% endif %}
+</body>
+</html>
