@@ -38,7 +38,7 @@ def display_one_image(image, title, subplot, titlesize=16):
     return (subplot[0], subplot[1], subplot[2]+1)
 
 def display_batch_of_images_with_gestures_and_hand_landmarks(images, results):
-    # Images and labels.
+    # images and labels.
     images = [image.numpy_view() for image in images]
     gestures = [top_gesture for (top_gesture, _) in results]
     multi_hand_landmarks_list = [multi_hand_landmarks for (_, multi_hand_landmarks) in results]
@@ -80,7 +80,7 @@ def display_batch_of_images_with_gestures_and_hand_landmarks(images, results):
 
         subplot = display_one_image(annotated_image, title, subplot, titlesize=dynamic_titlesize)
 
-    # Layout.
+    #layout
     plt.tight_layout()
     plt.subplots_adjust(wspace=SPACING, hspace=SPACING)
     plt.show()
