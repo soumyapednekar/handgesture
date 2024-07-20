@@ -34,7 +34,7 @@ def visualize():
     recognize_gestures_and_display(image_paths, output_path)
 
     return render_template('visualize.html', image_url=url_for('static', filename='images/gesture_visualization.png'))
-###
+
 @app.route('/index', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
