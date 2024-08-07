@@ -16,24 +16,6 @@ def allowed_file(filename):
 def index():
     return render_template('index.html')
 
-@app.route('/visualize')
-def visualize():
-    IMAGE_FILENAMES = ['thumbs_down.jpg', 'victory.jpg', 'thumbs_up.jpg', 'pointing_up.jpg']
-
-    #download images if they do not exist
-    image_paths = []
-    for name in IMAGE_FILENAMES:
-        image_path = os.path.join('static', 'images', name)
-        image_paths.append(image_path)
-        if not os.path.exists(image_path):
-            url = f'https://storage.googleapis.com/mediapipe-tasks/gesture_recognizer/{name}'
-            urllib.request.urlretrieve(url, image_path)
-
-    # call the gesture recognition function and save the output to a file
-    output_path = os.path.join('static', 'images', 'gesture_visualization.png')
-    recognize_gestures_and_display(image_paths, output_path)
-
-    return render_template('visualize.html', image_url=url_for('static', filename='images/gesture_visualization.png'))
 
 @app.route('/index', methods=['GET', 'POST'])
 def upload():
